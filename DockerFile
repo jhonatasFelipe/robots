@@ -1,4 +1,4 @@
-FROM php8.2-fpm
+FROM php:8.2-cli
 
 WORKDIR /var/www
 
@@ -6,17 +6,25 @@ RUN apt-get update && \
     apt-get install libzip-dev -y && \
     docker-php-ext-install zip
 
-RUN apt install nodejs
+RUN apt-get install nodejs -y
+
+RUN apt-get install npm -y
+
+RUN apt-get install git -y
+
+RUN git clone https://github.com/jhonatasFelipe/robots.git robots
 
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
     php composer-setup.php && \
     php -r "unlink('composer-setup.php');"
 
-RUN php composer.phar create-project --prefer-dist laravel/laravel robots
+RUN mv composer.phar /var/www/robots
 
-RUN 
+WORKDIR /var/www/robots
 
+RUN php composer.phar install 
 
+RUN npm install
 
-ENTRYPOINT [ "php","robots/artisan","serve" ]
+ENTRYPOINT [ "php","artisan","serve" ]
 CMD [ "--host=0.0.0.0" ]
