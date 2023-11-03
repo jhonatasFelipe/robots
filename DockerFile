@@ -1,0 +1,22 @@
+FROM php8.2-fpm
+
+WORKDIR /var/www
+
+RUN apt-get update && \
+    apt-get install libzip-dev -y && \
+    docker-php-ext-install zip
+
+RUN apt install nodejs
+
+RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \
+    php composer-setup.php && \
+    php -r "unlink('composer-setup.php');"
+
+RUN php composer.phar create-project --prefer-dist laravel/laravel robots
+
+RUN 
+
+
+
+ENTRYPOINT [ "php","robots/artisan","serve" ]
+CMD [ "--host=0.0.0.0" ]
