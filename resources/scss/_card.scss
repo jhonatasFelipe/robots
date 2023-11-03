@@ -1,0 +1,21 @@
+.card{
+    width: 300px;
+    border: solid .5px #666;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    padding: 5px;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    &:hover{
+        box-shadow: 5px 5px 3px 3px #888;
+    }
+
+    img{
+        width: 90%;
+    }
+}

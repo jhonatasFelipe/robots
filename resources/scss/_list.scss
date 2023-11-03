@@ -1,0 +1,20 @@
+.listItem{
+    height: 80px;
+    padding: 10px;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    border: solid 0.5px #888;
+    border-radius: 5px;
+    margin: 8px 0px;
+    img{
+        width: 70px;
+    }
+
+    h3{
+        width: 200px;
+        margin: 0 10px;
+
+    }
+
+}
